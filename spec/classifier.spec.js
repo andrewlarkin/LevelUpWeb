@@ -1,11 +1,12 @@
-var requirejs = require('requirejs');
-
 requirejs.config({
-    baseUrl: 'lib',
-    nodeRequire: require
+	paths: {
+		tasks: '../lib/tasks',
+		classifier: '../lib/classifier',
+		configLoad: '../lib/configLoad'
+	}
 });
 
-requirejs(['classifier'], function(Classifier){
+requirejs(['classifier', 'configLoad'], function(Classifier, ConfigLoad){
 	var user, c;
 
 	describe('Classifier', function(){
@@ -20,7 +21,7 @@ requirejs(['classifier'], function(Classifier){
 		describe('When instantiating a new classifier...', function(){
 
 			it('stores the classifier as part of the user session object', function(){
-				c = new Classifier('carousel', user)
+				c = new Classifier('carousel', user);
 
 				expect(user.classifiers.carousel).toBe(c);
 			});
@@ -34,7 +35,11 @@ requirejs(['classifier'], function(Classifier){
 			});
 
 			it('gets a collection of tasks for the type of classifier', function(){
+				c = new Classifier('carousel', user);
 
+				var taskList = ConfigLoad.get('config/tasks');
+
+				expect(c.tasks).toBe(taskList.carousel);
 			});
 
 			it('gets the users current skill level', function(){
@@ -46,8 +51,6 @@ requirejs(['classifier'], function(Classifier){
 			});
 		
 		});
-
-		
 
 	});
 });
