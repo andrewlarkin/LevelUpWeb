@@ -4,6 +4,11 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 	describe('Classifier', function(){
 
 		beforeEach(function(){
+			tasksObj = {};
+			interactionsObj = {};
+			c = undefined;
+			user = undefined;
+			Tasks._tasks = undefined;
 
 			interactionsObj = {
 				carousel: ['carousel_one', 'carousel_two']
@@ -31,14 +36,6 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 					return userLevels;
 				}
 			};
-		});
-
-		afterEach(function(){
-			tasksObj = {};
-			interactionsObj = {};
-			c = undefined;
-			user = undefined;
-			Tasks._tasks = undefined;
 		});
 
 		describe('When instantiating a new classifier...', function(){
@@ -148,7 +145,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 
 		describe('When evaulating a sequence of actions...', function(){
 			it('determines what task to use based on the input', function(){
-					
+
 			});
 
 			it('calculates the mental time for the sequence based on the matched task', function(){

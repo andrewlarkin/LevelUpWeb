@@ -3,7 +3,7 @@ requirejs(['tasks', 'configLoad'], function(Tasks, ConfigLoad){
 
     describe('When loading the task list...', function(){
 
-      afterEach(function(){
+      beforeEach(function(){
         Tasks._tasks = undefined;
       });
 

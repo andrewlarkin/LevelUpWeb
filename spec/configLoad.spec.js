@@ -4,13 +4,13 @@ requirejs(['configLoad', 'fs'], function(ConfigLoad, fs){
 
     describe('ConfigLoad', function(){
         beforeEach(function(){
-            testFile = fs.openSync('test.json', 'w');
-            fs.writeSync(testFile, testStr);
-        });
-
-        afterEach(function(){
             ConfigLoad.unload('test');
-            fs.unlinkSync("test.json");
+            spyOn(fs, 'lstatSync').andReturn({
+                isDirectory: function(){
+                    return false;
+                }
+            });
+            spyOn(fs, 'readFileSync').andReturn(testStr);
         });
 
         describe('When calling the load method...', function(){
