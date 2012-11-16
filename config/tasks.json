@@ -1,24 +1,42 @@
 {
-    "mouseMove": ["startMove", "stopMove"],
-    "button": ["mouseMove","mouseEnter","mouseDown","mouseUp"],
-    "dropdown": [],
-    "checkbox": [],
-    "radio": [],
-    "scrollbar": [],
-    "modal": [],
-    "navigation": ["button"],
-    "tieredNavigation": [],
-    "tab": [],
-    "tooltip": [],
-    "input": [],
-    "form": [],
-    "search": [],
-    "hover": ["mouseMove","wait"],
-    "navButton": ["button"],
-    "carousel": [
-        ["navButton","link"],
-        ["scrollbar","link"],
-        ["swipe","tap"]
-    ],
-    "radialMenu": ["button","button"]
+  "point": [
+    {"action": "startmove"},
+    {"action": "stopmove"}
+  ],
+  "click": [
+    {"action": "mousedown"},
+    {"action": "mouseup"}
+  ],
+  "drag": [
+    {"action": "mousedown", "role": "draggable"},
+    {"action": "point"},
+    {"action": "mouseup", "role": "draggable"}
+  ],
+  "drag_drop": [
+    {"action": "mousedown", "role": "draggable"},
+    {"action": "point", "role": "drop_target"},
+    {"action": "mouseup", "role": "draggable"}
+  ],
+  "press": [
+    {"action": "keydown"},
+    {"action": "keyup"}
+  ],
+  "hover": [
+    {"action": "point"},
+    {"action": "pause"}
+  ],
+  "carousel_nav": [
+    {"action": "point", "element": "button", "role": "carousel_nav"},
+    {"action": "click", "element": "button", "role": "carousel_nav", "repeatable": true},
+    {"action": "point", "element": "a", "role": "carousel_link"},
+    {"action": "click", "element": "a", "role": "carousel_link"}
+  ],
+  "carousel_scroll": [
+    {"action": "point", "role": "carousel_container"},
+    {"action": "scroll", "role": "carousel_container"}
+  ],
+  "tab": [
+    {"action": "point", "element": "button", "role": "tab"},
+    {"action": "click", "element": "button", "role": "tab"}
+  ]
 }
