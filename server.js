@@ -6,5 +6,5 @@ requirejs.config({
 });
 
 requirejs(['tasks'], function(Tasks){
-    print(Tasks.get('carousel'));
+    console.log(Tasks);
 });
