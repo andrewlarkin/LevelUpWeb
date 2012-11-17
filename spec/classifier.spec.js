@@ -143,10 +143,56 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 
 		});
 
-		describe('When evaulating a sequence of actions...', function(){
-			it('determines what task to use based on the input', function(){
+		describe('When matching a sequence of actions', function(){
+			beforeEach(function(){
+				interactionsObj = {
+					carousel: ['carousel_one', 'carousel_two']
+				};
 
+				tasksObj = {
+					carousel_one: [{action: 'startmove'}, {action: 'stopmove'}],
+					carousel_two: [{action: 'startmove'}, {action: 'stopmove'}, {action: 'mousedown'}]
+				};
+
+				c = new Classifier('carousel', user);
+
+				spyOn(c, 'evaluate');
 			});
+
+			it('matches the sequence if the tasks is identical', function(){
+				c.match([{action: 'startmove', posx: 100, posy: 150, time: 0}, {action: 'stopmove', posx: 220, posy: 150, time: 1200}]);
+
+				expect(c.evaluate).toHaveBeenCalledWith([{action: 'startmove', posx: 100, posy: 150, time: 0}, {action: 'stopmove', posx: 220, posy: 150, time: 1200}], 'carousel_one');
+			});
+
+			it('matches the sequence if the sequence contains all the actions of the task', function(){
+				c.match([{action: 'startmove', posx: 100, posy: 150, time: 0}, {action: 'stopmove', posx: 220, posy: 150, time: 1200}, {action: 'pause', time: 500}]);
+
+				expect(c.evaluate).toHaveBeenCalled();
+			});
+
+			it('does not match the sequence if the properties do not match', function(){
+				c.tasks.carousel_one = [{action: 'startmove'}, {action: 'stopmove', element: 'b', role: 'test'}];
+
+				c.match([{action: 'startmove', posx: 100, posy: 150, time: 0}, {action: 'stopmove', posx: 220, posy: 150, time: 1200}]);
+
+				expect(c.evaluate).not.toHaveBeenCalled();
+			});
+
+			it('does not match if all of the expected actions have not been matched', function(){
+				c.match([{action: 'startmove', posx: 100, posy: 150, time: 0}]);
+
+				expect(c.evaluate).not.toHaveBeenCalled();
+			});
+
+			it('matches the best sequence if more than one sequence matches', function(){
+				c.match([{action: 'startmove', posx: 100, posy: 150, time: 0}, {action: 'stopmove', posx: 220, posy: 150, time: 1200}, {action: 'mousedown'}]);
+
+				expect(c.evaluate).toHaveBeenCalledWith([{action: 'startmove', posx: 100, posy: 150, time: 0}, {action: 'stopmove', posx: 220, posy: 150, time: 1200}, {action: 'mousedown'}], 'carousel_two');
+			});
+		});
+
+		describe('When evaulating a sequence of actions...', function(){
 
 			it('calculates the mental time for the sequence based on the matched task', function(){
 
