@@ -262,8 +262,8 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				});
 
 				it('sets the mouseStartTime values when calling mousedown and returns the action time value', function(){
-					expect(c.timeCalculators.startmove({action: 'mousedown', time: 0})).toEqual(0);
-					expect(c.timeCalculators._mouseStartTime).toEqual(null);
+					expect(c.timeCalculators.mousedown({action: 'mousedown', time: 0})).toEqual(0);
+					expect(c.timeCalculators._mouseStartTime).toEqual(0);
 				});
 
 				it('returns 0 of no _mouseStartTime value is set calling mouseup', function(){
@@ -281,6 +281,32 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 					c.timeCalculators.mouseup({action: 'mouseup', time: 1000});
 
 					expect(c.timeCalculators._mouseStartTime).toEqual(null);
+				});
+
+				it('sets the keyStartTime values when calling keydown and returns the action time value', function(){
+					expect(c.timeCalculators.keydown({action: 'keydown', time: 0})).toEqual(0);
+					expect(c.timeCalculators._keyStartTime).toEqual(0);
+				});
+
+				it('returns 0 of no _keyStartTime value is set calling keyup', function(){
+					expect(c.timeCalculators.keyup({action: 'keyup', time: 1000})).toEqual(0);
+				});
+
+				it('returns the difference between the keydown and keyup times, minus an expected 400ms', function(){
+					c.timeCalculators.keydown({action: 'keydown', time: 0});
+
+					expect(c.timeCalculators.keyup({action: 'keyup', time: 1000})).toEqual(600);
+				});
+
+				it('sets the keyStartTIme to null after calling keyup', function(){
+					c.timeCalculators.keydown({action: 'keydown', time: 0});
+					c.timeCalculators.keyup({action: 'keyup', time: 1000});
+
+					expect(c.timeCalculators._keyStartTime).toEqual(null);
+				});
+
+				it('returns the action time for a pause', function(){
+					expect(c.timeCalculators.pause({action: 'pause', time: 1000})).toEqual(1000);
 				});
 
 			});
