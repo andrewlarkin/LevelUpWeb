@@ -31,9 +31,15 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 			userLevels = {carousel_one: 3, carousel_two: 2};
 			user = {
 				id: 12345,
+				getPointRate: function(){
+					return 500/1000; //pixels per millisecond
+				},
 				classifiers: {},
 				getLevels: function(type){
 					return userLevels;
+				},
+				setTime: function(){
+
 				}
 			};
 		});
@@ -194,9 +200,91 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 
 		describe('When evaulating a sequence of actions...', function(){
 
-			it('calculates the mental time for the sequence based on the matched task', function(){
+			beforeEach(function(){
+				interactionsObj = {
+					carousel: ['carousel_one', 'carousel_two']
+				};
+
+				tasksObj = {
+					carousel_one: [{action: 'startmove'}, {action: 'stopmove'}],
+					carousel_two: [{action: 'startmove'}, {action: 'stopmove'}, {action: 'mousedown'}]
+				};
+
+				c = new Classifier('carousel', user);
+
+				spyOn(user, 'setTime');
+			});
+
+						it('calls the appropriate calculator method', function(){
+				spyOn(c.timeCalculators, 'startmove');
+
+				c.evaluate([{action: 'startmove'}], 'test');
+
+				expect(c.timeCalculators.startmove).toHaveBeenCalled();
+			});
+
+			it('reduces the time by 200ms for each action that goes from a keyboard to a mouse', function(){
+				c.evaluate([{action: 'mousedown', time: 0}, {action: 'mouseup', time: 1000}, {action: 'pause', time: 300}, {action: 'keydown', 'time': 0}, {action: 'keyup', 'time': 900}], 'test');
+
+				//Even though the total times add up to 2200, we still have to factor out 400ms for each key level action.  This still leaves 1400, but since we homed from the mouse to the keyboard, 200ms is removed
+				expect(user.setTime).toHaveBeenCalledWith(1200, 'test');
+			});
+
+			describe('...and we are calling a calulator method...', function(){
+				it('sets the moveStartTime, movePosX and movePosY values when calling "startmove" and returns the action time value', function(){
+					expect(c.timeCalculators.startmove({action: 'startmove', posx: 100, posy: 200, time: 0})).toEqual(0);
+					expect(c.timeCalculators._moveStartTime).toEqual(0);
+					expect(c.timeCalculators._movePosX).toEqual(100);
+					expect(c.timeCalculators._movePosY).toEqual(200);
+				});
+
+				it('returns 0 if no _moveStartTime, _movePosY or _movePosX values are set when calling stopmove', function(){
+					expect(c.timeCalculators.stopmove({action: 'stopmove', posx: 200, posy: 250, time: 0})).toEqual(0);
+				});
+
+				it('factors out the user average time to move the mouse 200px', function(){
+					spyOn(user, 'getPointRate').andReturn(0.1);
+
+					c.timeCalculators.startmove({action: 'startmove', posx: 100, posy: 200, time: 0});
+
+					expect(c.timeCalculators.stopmove({action: 'stopmove', posx: 400, posy: 600, time: 6000})).toEqual(1000);
+				});
+
+				it('sets the moveStartTime, movePosY and movePosX values to null after calling stopmove', function(){
+					spyOn(user, 'getPointRate').andReturn(0.1);
+
+					c.timeCalculators.startmove({action: 'startmove', posx: 100, posy: 200, time: 0});
+
+					c.timeCalculators.stopmove({action: 'stopmove', posx: 400, posy: 600, time: 6000});
+
+					expect(c.timeCalculators._moveStartTime).toEqual(null);
+
+				});
+
+				it('sets the mouseStartTime values when calling mousedown and returns the action time value', function(){
+					expect(c.timeCalculators.startmove({action: 'mousedown', time: 0})).toEqual(0);
+					expect(c.timeCalculators._mouseStartTime).toEqual(null);
+				});
+
+				it('returns 0 of no _mouseStartTime value is set calling mouseup', function(){
+					expect(c.timeCalculators.mouseup({action: 'mouseup', time: 1000})).toEqual(0);
+				});
+
+				it('returns the difference between the mousedown and mouseup times, minus an expected 400ms', function(){
+					c.timeCalculators.mousedown({action: 'mousedown', time: 0});
+
+					expect(c.timeCalculators.mouseup({action: 'mouseup', time: 1000})).toEqual(600);
+				});
+
+				it('sets the mouseStartTIme to null after calling mouseup', function(){
+					c.timeCalculators.mousedown({action: 'mousedown', time: 0});
+					c.timeCalculators.mouseup({action: 'mouseup', time: 1000});
+
+					expect(c.timeCalculators._mouseStartTime).toEqual(null);
+				});
 
 			});
+
 		});
 
 	});
