@@ -16,6 +16,9 @@
 		"grunt-jasmine-node": "latest",
 		"grunt-requirejs": "latest"
 	},
+	"devDependencies": {
+		"yuidocjs": "latest"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/andrewlarkin/LevelUpWeb.git"
