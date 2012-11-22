@@ -12,6 +12,14 @@ module.exports = function(grunt) {
     requirejs: {
       baseUrl: 'lib'
     },
+    compass: {
+      dev: {
+        options: {
+          cssDir: 'webapp/public/stylesheets/css',
+          scssDir: 'webapp/public/stylesheets/scss'
+        }
+      }
+    },
     lint: {
       files: ['*.js', 'spec/*.js']
     },

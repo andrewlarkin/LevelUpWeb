@@ -13,11 +13,12 @@
 		"express": "3.0.x",
 		"socket.io": "0.9.x",
 		"mongoose": "3.3.x",
-		"grunt-jasmine-node": "latest",
-		"grunt-requirejs": "latest"
+		"grunt-requirejs": "latest",
+		"grunt-contrib-compass": ">=0.1.0"
 	},
 	"devDependencies": {
-		"yuidocjs": "latest"
+		"yuidocjs": "latest",
+		"grunt-jasmine-node": "latest"
 	},
 	"repository": {
 		"type": "git",
@@ -27,7 +28,7 @@
 		"test": "grunt test"
 	},
 	"engines": {
-	    "node": "0.8.10",
+	    "node": "0.8.x",
 	    "npm": "1.1.x"
 	}
 }

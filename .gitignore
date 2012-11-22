@@ -1,5 +1,10 @@
+# Mac OS files
 .DS_Store
 
 tasks.txt
 
+# nodejs files
 node_modules
+
+# Ruby files
+Gemfile.lock
