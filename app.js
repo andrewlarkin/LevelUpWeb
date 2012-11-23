@@ -5,7 +5,39 @@ requirejs.config({
     nodeRequire: require
 });
 
-requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(express, http, io, User, Classifier){
+requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(express, http, socketio, User, Classifier){
+    
+  var app = express(),
+      server = http.createServer(app),
+      io = socketio.listen(server),
+
+      assetPath = './webapp/public/',
+      viewPath =  './webapp/views/',
+      jsPath = assetPath + 'javascripts/',
+      cssPath = assetPath + 'stylesheets/css/',
+      imagePath = assetPath + 'images/';
+
+
+  app.get('/', function(req, res){
+    res.sendfile(viewPath + 'index.html');
+  });
+
+  app.get('/js/*', function(req, res){
+    res.sendfile(jsPath + req.params[0]);
+  });
+
+  app.get('/css/*', function(req, res){
+    res.sendfile(cssPath + req.params[0]);
+  });
+
+  server.listen('3000');
+
+  io.sockets.on('connection', function(socket){
+    socket.on('test', function(data){
+      console.log(data);
+    });
+  });
+
     //spool up webserver
 
     //create a user object for this connection

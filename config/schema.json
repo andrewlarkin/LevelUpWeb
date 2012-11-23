@@ -1,0 +1,4 @@
+{
+  "id": STRING,
+  "pointRate": NUMBER
+}
