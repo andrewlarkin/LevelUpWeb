@@ -33,6 +33,10 @@ requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(expre
   server.listen('3000');
 
   io.sockets.on('connection', function(socket){
+    //read cookie
+
+    //
+
     socket.on('test', function(data){
       console.log(data);
     });
