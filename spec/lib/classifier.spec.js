@@ -33,8 +33,8 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				id: 12345,
 				pointRate: 0.1,
 				classifiers: {},
-				getLevels: function(type){
-					return userLevels;
+				getLevels: function(type, cb){
+					cb(userLevels);
 				},
 				setTime: function(){
 

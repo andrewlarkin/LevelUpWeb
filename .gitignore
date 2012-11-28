@@ -8,3 +8,6 @@ node_modules
 
 # Ruby files
 Gemfile.lock
+
+#compiled css
+webapp/public/stylesheets/css
