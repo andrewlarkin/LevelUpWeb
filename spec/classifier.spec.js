@@ -31,9 +31,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 			userLevels = {carousel_one: 3, carousel_two: 2};
 			user = {
 				id: 12345,
-				getPointRate: function(){
-					return 500/1000; //pixels per millisecond
-				},
+				pointRate: 0.1,
 				classifiers: {},
 				getLevels: function(type){
 					return userLevels;
@@ -243,7 +241,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				});
 
 				it('factors out the user average time to move the mouse 200px', function(){
-					spyOn(user, 'getPointRate').andReturn(0.1);
+					user.pointRate = 0.1;
 
 					c.timeCalculators.startmove({action: 'startmove', posx: 100, posy: 200, time: 0});
 
@@ -251,7 +249,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				});
 
 				it('sets the moveStartTime, movePosY and movePosX values to null after calling stopmove', function(){
-					spyOn(user, 'getPointRate').andReturn(0.1);
+					user.pointRate = 0.1;
 
 					c.timeCalculators.startmove({action: 'startmove', posx: 100, posy: 200, time: 0});
 
