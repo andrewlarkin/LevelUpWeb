@@ -11,3 +11,5 @@ Gemfile.lock
 
 #compiled css
 webapp/public/stylesheets/css
+
+.sass-cache
