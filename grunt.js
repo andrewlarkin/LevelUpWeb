@@ -13,10 +13,9 @@ module.exports = function(grunt) {
       baseUrl: 'lib'
     },
     compass: {
-      dev: {
+      dist: {
         options: {
-          cssDir: 'webapp/public/stylesheets/css',
-          scssDir: 'webapp/public/stylesheets/scss'
+          config: 'config/config.rb'
         }
       }
     },
@@ -52,6 +51,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-jasmine-node');
   grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
   grunt.registerTask('test', 'lint jasmine_node');
   // Default task.
