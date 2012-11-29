@@ -1,0 +1,136 @@
+@import 'compass';
+@import 'variables';
+@import 'mixins';
+
+//variables
+
+body.luw {
+    margin: 0;
+    padding: 1.5em;
+    color: $black;
+    background-color: $almost-white;
+    font-family: $default-type;
+}
+
+.luw-ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.luw-h1 {
+    margin: 0;
+    padding: 0;
+    color: $blue;
+    font-size: $xlarge;
+    font-weight: normal;
+}
+
+.luw-h1-subheader {
+    display: inline;
+    color: $light-blue;
+    font-size: $normal;
+}
+
+.luw-h2 {
+    margin: 0 0 0.2em 0;
+    padding: 0;
+    color: $smoke;
+    font-size: $normal;
+}
+
+.luw-header {
+    margin: 0 0 2em 0;
+    padding: 0;
+    border-bottom: 5px solid $yellow-orange;
+}
+
+.luw-nav {
+    float: left;
+    width: 25%;
+    padding: 0 1em 1em 1em;
+    margin: 0 0 2em 0;
+    border-right: 1px solid $yellow;
+    @include box-sizing('border-box');
+}
+
+.luw-nav-list {
+    z-index: 0;
+    @include box-sizing('border-box');
+
+    &.luw-nav-tiered {
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        right: -100%;
+        display: none;
+        border: 1px solid $blue;
+        padding: cp(1);
+        width: 100%;
+
+        &.is-dropdown-active {
+            display: block
+        }
+    }
+}
+
+.luw-nav-list-item {
+    position: relative;
+    display: block;
+    margin: 0 0 cp(1) 0;
+    border: 2px solid $white;
+    font-size: $normal;
+    color: $almost-white;
+    background-color: $light-grey;
+
+    a, button {
+        display: block;
+        padding: 0.5em;
+        width: 100%;
+        color: inherit;
+        background-color: $blue;
+        @include box-sizing('border-box');
+        text-align: left;
+
+        &:hover {
+            background-color: $light-blue;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        padding-right: 1.5em;
+
+        &:before {
+            content: '+';
+            position: absolute;
+            right: 0.5em;
+            font-size: $normal;
+        }
+
+        &.is-dropdown-active {
+            &:before {
+                content: '-';
+            }
+        }
+    }
+}
+
+.luw-section {
+    float: left;
+    width: 75%;
+    padding: 0 0 0 1em;
+    margin: 0 0 2em -1px;
+    border-left: 1px solid $yellow;
+    @include box-sizing('border-box');
+}
+
+.luw-footer {
+    float: none;
+    clear: both;
+    padding: 2em 0px 0px 0px;
+    border-top: 1px solid $yellow;
+}

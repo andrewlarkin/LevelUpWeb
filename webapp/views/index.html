@@ -9,9 +9,15 @@
         <meta name="author" content="Andrew Larkin">
         <meta charset="UTF-8">
 
+        <link href="/css/normalize.css" rel="stylesheet" />
+        <link href="/css/base.css" rel="stylesheet" />
+        <link href="/css/levelupweb.css" rel="stylesheet" />
+        <link href="/css/skill_readout.css" rel="stylesheet" />
+        <link href="/css/carousel.css" rel="stylesheet" />
+
         <script src="/js/vendor/require.js"></script>
         <script src="/js/vendor/jquery-1.8.3.js"></script>
-        <script src="/js/vendor/xooie-0.0.2.js"></script>
+        <script src="/js/vendor/xooie-0.0.3.js"></script>
 
         <script src="/js/requirejs_config.js"></script>
 
@@ -21,43 +27,94 @@
 
     </head>
 
-    <body>
+    <body class="luw">
+
+        <header class="luw-header">
+            <h1 class="luw-h1">LevelUpWeb<span class="luw-h1-subheader">Making a Web That Works For Everybody</span></h1>
+        </header>
+
+        <nav class="luw-nav">
+            <h2 class="luw-h2">Explore</h2>
+            <ol class="luw-ol luw-nav-list">
+                <li class="luw-nav-list-item"><a href="">What is LevelUpWeb?</a></li>
+                <li class="luw-nav-list-item"><a href="">Determining Skill Levels</a></li>
+                <li class="luw-nav-list-item"><a href="">User Profile Training</a></li>
+                <li class="luw-nav-list-item" data-widget-type="dropdown">
+                    <button type="button" data-role="dropdown-handle">Common Web Interactions</a>
+                    <ol class="luw-ol luw-nav-list luw-nav-tiered" data-role="dropdown-content">
+                        <li class="luw-nav-list-item"><a href="">Carousel</a></li>
+                        <li class="luw-nav-list-item"><a href="">Tabs</a></li>
+                        <li class="luw-nav-list-item"><a href="">Forms</a></li>
+                        <li class="luw-nav-list-item"><a href="">Search</a></li>
+                        <li class="luw-nav-list-item"><a href="">Menus</a></li>
+                        <li class="luw-nav-list-item"><a href="">Tiered Menus</a></li>
+                        <li class="luw-nav-list-item"><a href="">Radial Menus</a></li>
+                        <li class="luw-nav-list-item"><a href="">Tooltips</a></li>
+                        <li class="luw-nav-list-item"><a href="">Accordions</a></li>
+                        <li class="luw-nav-list-item"><a href="">Modals</a></li>
+                    </ol>
+                </li>
+                <li class="luw-nav-list-item"><a href="">View Data</a></li>
+                <li class="luw-nav-list-item"><a href="http://github.com/andrewlarkin/LevelUpWeb" target="_blank">Check Out the Project on GitHub!</a></li>
+            </ol>
+
+            <h2 class="luw-h2">How Am I Doing?</h2>
+            <ol class="luw-ol skill-readout">
+                <li class="skill-readout-item">
+                    <span>Carousel</span>
+                    <ol class="skill-readout-levels">
+                        <li class="skill-readout-level-1 is-active"></li>
+                        <li class="skill-readout-level-2 is-active"></li>
+                        <li class="skill-readout-level-3 is-active"></li>
+                        <li class="skill-readout-level-4"></li>
+                    </ol>
+                </li>
+            </ol>
+        </nav>
         
-        <div data-widget-type="carousel">
-            <button class="carousel-control prev" type="button" data-role="carousel-control" data-scroll="-1item"></button>
-            <button class="carousel-control next" type="button" data-role="carousel-control" data-scroll="+1item"></button>
+        <section class="luw-section">
+            <h1 class="luw-h1">Carousel</h1>
 
-            <div>
-                <ol data-role="carousel-content">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ol>
+            <div class="carousel" data-widget-type="carousel">
+                <button class="carousel-control prev" type="button" data-role="carousel-control" data-scroll="-1item">&larr;</button>
+                <button class="carousel-control next" type="button" data-role="carousel-control" data-scroll="+1item">&rarr;</button>
+
+                <div>
+                    <ol class="luw-ol carousel-content" data-role="carousel-content">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ol>
+                </div>
             </div>
-        </div>
 
-        <div data-widget-type="tab">
+            <div data-widget-type="tab">
 
 
-        </div>
+            </div>
+        </section>
+
+        <footer class="luw-footer">
+            <p>© 2012 Andrew Larkin</p>
+        </footer>   
 
     </body>
 </html>
