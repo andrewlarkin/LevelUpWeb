@@ -30,24 +30,33 @@ requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(expre
     res.sendfile(cssPath + req.params[0]);
   });
 
+  //spool up webserver
   server.listen('3000');
 
   io.sockets.on('connection', function(socket){
     //read cookie
+    var id = null;
 
-    //
+    //create user object
+    var user = new User(id);
 
-    socket.on('test', function(data){
-      console.log(data);
+    user.on('levelChange', function(context, level){
+      socket.emit('levelChange', context, level);
+    });
+
+    socket.on('sequence', function(context, sequence){
+      console.log(context, data);
+      
+      var classifier = new Classifier(context, user);
+
+      classifier.match(sequence);
     });
   });
 
-    //spool up webserver
+    
 
     //create a user object for this connection
 
-    //When a sequence is received:
-      //create classifier for that type (as provided by the request)
         //type is determined based on what interaction the user has entered or focused on
       //call classifier.match to verify that the sequence is valid and, if it is, evaluate it
         //evaluation will automatically update the user
