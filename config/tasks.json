@@ -25,17 +25,17 @@
     {"action": "point"},
     {"action": "pause"}
   ],
-  "carousel_nav": [
-    {"action": "point", "element": "button", "role": "carousel_nav"},
-    {"action": "click", "element": "button", "role": "carousel_nav", "repeatable": true},
-    {"action": "point", "element": "a", "role": "carousel_link"},
-    {"action": "click", "element": "a", "role": "carousel_link"}
+  "click_carousel_nav": [
+    {"action": "point", "element": "button", "role": "carousel-nav"},
+    {"action": "click", "element": "button", "role": "carousel-nav", "repeatable": true},
+    {"action": "point", "element": "a", "role": "carousel-link"},
+    {"action": "click", "element": "a", "role": "carousel-link"}
   ],
-  "carousel_scroll": [
-    {"action": "point", "role": "carousel_container"},
-    {"action": "scroll", "role": "carousel_container"}
+  "scroll_carousel_container": [
+    {"action": "point", "role": "carousel-container"},
+    {"action": "scroll", "role": "carousel-container"}
   ],
-  "tab": [
+  "click_tab": [
     {"action": "point", "element": "button", "role": "tab"},
     {"action": "click", "element": "button", "role": "tab"}
   ]

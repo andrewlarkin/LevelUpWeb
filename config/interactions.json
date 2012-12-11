@@ -1,11 +1,11 @@
 {
-  "carousel": ["carousel_nav", "carousel_scroll"],
-  "tab": ["tab"],
+  "carousel": ["click_carousel_nav", "scroll_carousel_container"],
+  "tab": ["click_tab"],
   "form": [],
-  "search": ["click_search_enter", "click_search_button"],
+  "search": ["input_search_enter", "input_search_submit"],
   "radial_menu": ["radial_expand_select"],
   "nav": ["click_nav_item"],
-  "tiered_Nav": ["click_nav_dropdown", "click_nav_hover_dropdown"],
-  "tooltip": ["activate_tooltip"],
+  "tiered_nav": ["click_nav_item", "click_nav_dropdown", "click_nav_hover_dropdown"],
+  "tooltip": ["hover_tooltip"],
   "modal": []
 }
