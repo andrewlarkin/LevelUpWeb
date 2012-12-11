@@ -33,29 +33,29 @@
             <h1 class="luw-h1">LevelUpWeb<span class="luw-h1-subheader">Making a Web That Works For Everybody</span></h1>
         </header>
 
-        <nav class="luw-nav">
+        <nav class="luw-nav" data-luw-interaction="tiered-nav">
             <h2 class="luw-h2">Explore</h2>
             <ol class="luw-ol luw-nav-list">
-                <li class="luw-nav-list-item"><a href="">What is LevelUpWeb?</a></li>
-                <li class="luw-nav-list-item"><a href="">Determining Skill Levels</a></li>
-                <li class="luw-nav-list-item"><a href="">User Profile Training</a></li>
+                <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">What is LevelUpWeb?</a></li>
+                <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Determining Skill Levels</a></li>
+                <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">User Profile Training</a></li>
                 <li class="luw-nav-list-item" data-widget-type="dropdown">
-                    <button type="button" data-role="dropdown-handle">Common Web Interactions</a>
+                    <button type="button" data-role="dropdown-handle" data-luw-role="nav-dropdown" data-luw-event="mousedown, mouseup">Common Web Interactions</a>
                     <ol class="luw-ol luw-nav-list luw-nav-tiered" data-role="dropdown-content">
-                        <li class="luw-nav-list-item"><a href="">Carousel</a></li>
-                        <li class="luw-nav-list-item"><a href="">Tabs</a></li>
-                        <li class="luw-nav-list-item"><a href="">Forms</a></li>
-                        <li class="luw-nav-list-item"><a href="">Search</a></li>
-                        <li class="luw-nav-list-item"><a href="">Menus</a></li>
-                        <li class="luw-nav-list-item"><a href="">Tiered Menus</a></li>
-                        <li class="luw-nav-list-item"><a href="">Radial Menus</a></li>
-                        <li class="luw-nav-list-item"><a href="">Tooltips</a></li>
-                        <li class="luw-nav-list-item"><a href="">Accordions</a></li>
-                        <li class="luw-nav-list-item"><a href="">Modals</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Carousel</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Tabs</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Forms</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Search</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Menus</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Tiered Menus</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Radial Menus</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Tooltips</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Accordions</a></li>
+                        <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">Modals</a></li>
                     </ol>
                 </li>
-                <li class="luw-nav-list-item"><a href="">View Data</a></li>
-                <li class="luw-nav-list-item"><a href="http://github.com/andrewlarkin/LevelUpWeb" target="_blank">Check Out the Project on GitHub!</a></li>
+                <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="">View Data</a></li>
+                <li class="luw-nav-list-item" data-luw-role="nav-item" data-luw-event="mousedown, mouseup"><a href="http://github.com/andrewlarkin/LevelUpWeb" target="_blank">Check Out the Project on GitHub!</a></li>
             </ol>
 
             <h2 class="luw-h2">How Am I Doing?</h2>
@@ -76,32 +76,21 @@
             <h1 class="luw-h1">Carousel</h1>
 
             <div class="carousel" data-widget-type="carousel">
-                <button class="carousel-control prev" type="button" data-role="carousel-control" data-scroll="-1item">&larr;</button>
-                <button class="carousel-control next" type="button" data-role="carousel-control" data-scroll="+1item">&rarr;</button>
+                <button class="carousel-control prev" type="button" data-role="carousel-control" data-scroll="-1item" data-luw-role="carousel-nav" data-luw-event="mousedown, mouseup">&larr;</button>
+                <button class="carousel-control next" type="button" data-role="carousel-control" data-scroll="+1item" data-luw-role="carousel-nav" data-luw-event="mousedown, mouseup">&rarr;</button>
 
                 <div>
-                    <ol class="luw-ol carousel-content" data-role="carousel-content">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                    <ol class="luw-ol carousel-content" data-role="carousel-content" data-luw-role="carousel-container" data-luw-event="scroll">
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
+                        <li data-luw-role="carousel-item" data-luw-event="mousedown, mouseup"></li>
                     </ol>
                 </div>
             </div>
