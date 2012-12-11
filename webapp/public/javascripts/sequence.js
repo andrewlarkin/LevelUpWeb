@@ -8,6 +8,9 @@ define('sequence', ['jquery', 'actionTimer', 'socketManager'], function($, AT, S
     currentInteraction = context;
   });
 
+  //TODO: LastTime should be tracked HERE, the time value for each should be since the last update
+  //That makes no sense, though... 
+
   Sequence = {
     record: function(props){
       props.time = time.get();

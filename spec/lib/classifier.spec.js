@@ -213,7 +213,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				spyOn(user, 'setTime');
 			});
 
-						it('calls the appropriate calculator method', function(){
+			it('calls the appropriate calculator method', function(){
 				spyOn(c.timeCalculators, 'startmove');
 
 				c.evaluate([{action: 'startmove'}], 'test');
