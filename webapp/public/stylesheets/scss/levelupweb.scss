@@ -62,14 +62,18 @@ body.luw {
         z-index: 100;
         position: absolute;
         top: 0;
-        right: -100%;
+        right: 0;
         display: none;
+        opacity: 0;
         border: 1px solid $blue;
         padding: cp(1);
         width: 100%;
+        @include transition(opacity 0.2s);
 
         &.is-dropdown-active {
-            display: block
+            display: block;
+            right: -100%;
+            opacity: 1;
         }
     }
 }
@@ -91,6 +95,7 @@ body.luw {
         background-color: $blue;
         @include box-sizing('border-box');
         text-align: left;
+        @include transition(background-color 0.4s); 
 
         &:hover {
             background-color: $light-blue;
