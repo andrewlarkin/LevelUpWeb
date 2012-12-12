@@ -1,3 +1,70 @@
-define('interaction', function(){
-  
+define('interaction', ['jquery', 'sequence'], function($, Sequence){
+  //TODO: potentially make a base interaction class that is inherited by each interaction type?
+
+  var instances = [],
+      instanceCounter;
+
+  var Interaction = function(element){
+    var self, components;
+
+    this.root = $(element);
+
+    this.context = this.root.attr('[data-luw-interaction]');
+
+    if (this.root.data(this.context + '-interaction')) {
+      return instances[this.root.data(this.context + '-interaction')];
+    }
+
+    instanceCounter += 1;
+    instance[instanceCounter] = this;
+    this.root.data(this.context + '-interaction', instanceCounter);
+
+    this.handlers = {
+      mouseenter: function(event){
+        $(document).trigger('contextChange', self.context);
+      },
+
+      mouseleave: function(event){
+        $(document).trigger('contextChange', null);
+      },
+
+      component_event: function(event){
+        Sequence.record({
+          action: event.type,
+          element: event.data.element,
+          role: event.data.role
+        });
+      },
+
+      scroll: function(event) {
+
+      }
+    };
+
+    this.root.on({
+      mouseenter: this.handlers.mouseenter,
+      mouseleave: this.handlers.mouseleave
+    });
+
+    components = this.root.find('[data-luw-role]');
+
+    components.each(function(index){
+      var el = $(this),
+          events = el.attr('[data-luw-event]').split(','),
+          tag = el.prop('tagName').toLowerCase(),
+          role = el.attr('[data-luw-role]'),
+          i;
+
+      for (i = 0; i < events.length; i += 1){
+        if(events[i] === scroll || events[i] === 'mousewheel') {
+          $(this).on('scroll', {element: tag, role: role}, self.handlers.scroll);
+        } else {
+          $(this).on(event[i], {element: tag, role: role}, self.handlers.component_event);
+        }
+      }
+    });
+
+  };
+
+  return Interaction;
 });
