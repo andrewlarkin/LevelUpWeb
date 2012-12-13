@@ -7,25 +7,37 @@ define('interaction', ['jquery', 'sequence'], function($, Sequence){
   var Interaction = function(element){
     var self, components;
 
+    self = this;
+
     this.root = $(element);
 
-    this.context = this.root.attr('[data-luw-interaction]');
+    this.context = this.root.attr('data-luw-interaction');
 
     if (this.root.data(this.context + '-interaction')) {
       return instances[this.root.data(this.context + '-interaction')];
     }
 
     instanceCounter += 1;
-    instance[instanceCounter] = this;
+    instances[instanceCounter] = this;
     this.root.data(this.context + '-interaction', instanceCounter);
+
+    this.timers = {
+      context: 0
+    };
 
     this.handlers = {
       mouseenter: function(event){
+        self.timers.context = clearTimeout(self.timers.context);
+
         $(document).trigger('contextChange', self.context);
       },
 
       mouseleave: function(event){
-        $(document).trigger('contextChange', null);
+        self.timers.context = setTimeout(function(){
+          $(document).trigger('contextChange', null);
+
+          self.timers.context = clearTimeout(self.timers.context);
+        }, 1000);
       },
 
       component_event: function(event){
@@ -50,16 +62,16 @@ define('interaction', ['jquery', 'sequence'], function($, Sequence){
 
     components.each(function(index){
       var el = $(this),
-          events = el.attr('[data-luw-event]').split(','),
+          events = el.attr('data-luw-event').split(','),
           tag = el.prop('tagName').toLowerCase(),
-          role = el.attr('[data-luw-role]'),
+          role = el.attr('data-luw-role'),
           i;
 
       for (i = 0; i < events.length; i += 1){
         if(events[i] === scroll || events[i] === 'mousewheel') {
           $(this).on('scroll', {element: tag, role: role}, self.handlers.scroll);
         } else {
-          $(this).on(event[i], {element: tag, role: role}, self.handlers.component_event);
+          $(this).on(events[i], {element: tag, role: role}, self.handlers.component_event);
         }
       }
     });
