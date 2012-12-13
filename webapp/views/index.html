@@ -20,11 +20,8 @@
         <script src="/js/vendor/xooie-0.0.3.js"></script>
 
         <script src="/js/requirejs_config.js"></script>
-
-        <script src="/socket.io/socket.io.js"></script>
         
         <script src="/js/levelup.js"></script>
-
     </head>
 
     <body class="luw">
@@ -60,9 +57,18 @@
 
             <h2 class="luw-h2">How Am I Doing?</h2>
             <ol class="luw-ol skill-readout">
-                <li class="skill-readout-item">
+                <li class="skill-readout-item" data-readout-type="carousel">
                     <span>Carousel</span>
-                    <ol class="skill-readout-levels">
+                    <ol class="skill-readout-levels" data-readout-role="level-container">
+                        <li class="skill-readout-level-1 is-active"></li>
+                        <li class="skill-readout-level-2 is-active"></li>
+                        <li class="skill-readout-level-3 is-active"></li>
+                        <li class="skill-readout-level-4"></li>
+                    </ol>
+                </li>
+                <li class="skill-readout-item" data-readout-type="tiered-nav">
+                    <span>Tiered Nav</span>
+                    <ol class="skill-readout-levels" data-readout-role="level-container">
                         <li class="skill-readout-level-1 is-active"></li>
                         <li class="skill-readout-level-2 is-active"></li>
                         <li class="skill-readout-level-3 is-active"></li>
@@ -75,7 +81,7 @@
         <section class="luw-section">
             <h1 class="luw-h1">Carousel</h1>
 
-            <div class="carousel" data-widget-type="carousel">
+            <div class="carousel" data-widget-type="carousel" data-luw-interaction="carousel">
                 <button class="carousel-control prev" type="button" data-role="carousel-control" data-scroll="-1item" data-luw-role="carousel-nav" data-luw-event="mousedown, mouseup">&larr;</button>
                 <button class="carousel-control next" type="button" data-role="carousel-control" data-scroll="+1item" data-luw-role="carousel-nav" data-luw-event="mousedown, mouseup">&rarr;</button>
 
@@ -104,6 +110,16 @@
         <footer class="luw-footer">
             <p>© 2012 Andrew Larkin</p>
         </footer>   
+
+        <script> 
+            require(['readout'], function(Readout){
+                $('[data-readout-type]').each(function(index, element){
+                    var interaction = $(element).attr('data-readout-type');
+
+                    new Readout(interaction, $(element));
+                });
+            });
+        </script>
 
     </body>
 </html>

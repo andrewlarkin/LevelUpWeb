@@ -1,11 +1,15 @@
 define('sequence', ['jquery', 'actionTimer', 'socketManager'], function($, AT, SM){
   var Sequence, 
       currentSequence = [],
-      currentInteraction = null;
+      currentContext = null;
       time = new AT();
 
   $(document).on('contextChange', function(event, context){
-    currentInteraction = context;
+    if(!context) {
+      Sequence.send();
+    }
+
+    currentContext = context;
   });
 
   //TODO: LastTime should be tracked HERE, the time value for each should be since the last update
@@ -24,15 +28,15 @@ define('sequence', ['jquery', 'actionTimer', 'socketManager'], function($, AT, S
     },
 
     send: function(){
-      if (SM.isOpen && currentInteraction !== null){
-        SM.send('sequence', {context: currentContext, sequence: currentSequence});
+      if (SM.isOpen()){
+        SM.emit('sequence', {context: currentContext, sequence: currentSequence});
       }
 
       Sequence.reset();
     },
 
     reset: function(){
-      currentInteraction = null;
+      currentContext = null;
       currentSequence = [];
 
       $(document).trigger('sequenceReset');

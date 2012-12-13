@@ -2,7 +2,8 @@ define('mouseTracker', ['jquery', 'sequence'], function($, Sequence){
 
   var MT, handlers, timers, 
       startAction,
-      isMoving = false;
+      isMoving = false,
+      moveTicks = 0;
 
   timers = {
     mouse: 0
@@ -10,20 +11,26 @@ define('mouseTracker', ['jquery', 'sequence'], function($, Sequence){
 
   handlers = {
     mouseMove: function(event){
-      if (!isMoving) {
-        isMoving = true;
-        
-        MT.startmove(event.pageX, event.pageY);
+      moveTicks += 1;
+
+      if (moveTicks > 20) {
+
+        if (!isMoving) {
+          isMoving = true;
+          
+          MT.startmove(event.pageX, event.pageY);
+        }
+
+        clearTimeout(timers.mouse);
+
+        timers.mouse = setTimeout(function(e){
+          MT.stopmove(e.pageX, e.pageY, e.toElement);
+
+          timers.mouse = clearTimeout(timers.mouse);
+          isMoving = false;
+          moveTicks = 0;
+        }.bind(this, event), 50);
       }
-
-      clearTimeout(timers.mouse);
-
-      timers.mouse = setTimeout(function(e){
-        timers.mouse = clearTimeout(timers.mouse);
-        isMoving = false;
-        
-        MT.stopmove(e.pageX, e.pageY, e.toElement);
-      }.bind(this, event), 50);
     }
   };
 
@@ -61,12 +68,13 @@ define('mouseTracker', ['jquery', 'sequence'], function($, Sequence){
 
       element = $(element);
 
-      if (!element.attr('[data-luw-role]')) {
+      if (!element.attr('data-luw-role')) {
         element = element.parents('[data-luw-role]').first();
       }
 
-      tag = element.prop('tagName').toLowerCase();
-      role = element.attr('[data-luw-role]');
+      tag = element.prop('tagName') || '';
+      tag = tag.toLowerCase();
+      role = element.attr('data-luw-role');
 
       Sequence.update(startAction, {element: tag, role: role});
 

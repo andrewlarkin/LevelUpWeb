@@ -1,4 +1,4 @@
-define('socketManager', function(){
+define('socketManager', ['io'], function(io){
   var SM, openSocket, isOpen = false;
 
   SM = {
@@ -9,7 +9,7 @@ define('socketManager', function(){
 
       openSocket = io.connect(url);
 
-      openSocket.on('connection', function(){
+      openSocket.on('connect', function(){
         isOpen = true;
       });
 
@@ -35,10 +35,6 @@ define('socketManager', function(){
     },
 
     listen: function(event, callback){
-      if (!isOpen) {
-        return;
-      }
-
       openSocket.on(event, callback);
     },
 
