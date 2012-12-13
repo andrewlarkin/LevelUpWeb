@@ -23,18 +23,6 @@ define('actionTimer', function(){
     this._time = 0;
   };
 
-
-  /*var checkActionTimer = function(){
-    actionTimer = clearTimeout(actionTimer);
-
-    actionTimer = setTimeout(function(){
-      actionTimer = clearTimeout(actionTimer);
-      sequence = [];
-      Timer.stop();
-
-    }, 500);
-  };*/
-
   return AT;
 
 });
