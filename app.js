@@ -17,7 +17,6 @@ requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(expre
       cssPath = assetPath + 'stylesheets/css/',
       imagePath = assetPath + 'images/';
 
-
   app.get('/', function(req, res){
     res.sendfile(viewPath + 'index.html');
   });
@@ -34,23 +33,29 @@ requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(expre
   server.listen('3000');
 
   io.sockets.on('connection', function(socket){
-    //read cookie
-    var id = null;
+    try {
+      //read cookie
+      var id = null;
 
-    //create user object
-    var user = new User(id);
+      //create user object
+      //var user = new User(id);
 
-    user.on('levelChange', function(context, level){
-      socket.emit('levelChange', context, level);
-    });
+      /*user.on('levelChange', function(context, level){
+        socket.emit('levelChange', context, level);
+      });*/
 
-    socket.on('sequence', function(context, sequence){
-      console.log(context, data);
-      
-      var classifier = new Classifier(context, user);
+      socket.on('sequence', function(data){
+        console.log(data);
+        
+        //var classifier = new Classifier(data.context);
 
-      classifier.match(sequence);
-    });
+        socket.emit('levelChange', data.context, 2);
+
+        //classifier.match(sequence);
+      });
+    } catch (e) {
+      console.log(e);
+    }
   });
 
     
