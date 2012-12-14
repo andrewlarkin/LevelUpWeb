@@ -1,7 +1,7 @@
 define('sequence', ['jquery', 'actionTimer', 'socketManager'], function($, AT, SM){
-  var Sequence, 
+  var Sequence,
       currentSequence = [],
-      currentContext = null;
+      currentContext = null,
       time = new AT();
 
   $(document).on('contextChange', function(event, context){
@@ -11,9 +11,6 @@ define('sequence', ['jquery', 'actionTimer', 'socketManager'], function($, AT, S
 
     currentContext = context;
   });
-
-  //TODO: LastTime should be tracked HERE, the time value for each should be since the last update
-  //That makes no sense, though... 
 
   Sequence = {
     record: function(props){

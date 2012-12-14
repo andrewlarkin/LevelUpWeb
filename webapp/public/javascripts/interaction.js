@@ -25,6 +25,9 @@ define('interaction', ['jquery', 'sequence'], function($, Sequence){
       context: 0
     };
 
+    this._mousedown = null;
+    this._keydown = null;
+
     this.handlers = {
       mouseenter: function(event){
         self.timers.context = clearTimeout(self.timers.context);

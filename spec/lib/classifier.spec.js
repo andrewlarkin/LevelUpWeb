@@ -216,7 +216,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 			it('calls the appropriate calculator method', function(){
 				spyOn(c.timeCalculators, 'startmove');
 
-				c.evaluate([{action: 'startmove'}], 'test');
+				c.evaluate([{action: 'startmove'}], 'carousel_one');
 
 				expect(c.timeCalculators.startmove).toHaveBeenCalled();
 			});
@@ -225,7 +225,7 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				c.evaluate([{action: 'mousedown', time: 0}, {action: 'mouseup', time: 1000}, {action: 'pause', time: 300}, {action: 'keydown', 'time': 0}, {action: 'keyup', 'time': 900}], 'test');
 
 				//Even though the total times add up to 2200, we still have to factor out 400ms for each key level action.  This still leaves 1400, but since we homed from the mouse to the keyboard, 200ms is removed
-				expect(user.setTime).toHaveBeenCalledWith(1200, 'test');
+				expect(user.setTime).toHaveBeenCalledWith('test', 1200);
 			});
 
 			describe('...and we are calling a calulator method...', function(){

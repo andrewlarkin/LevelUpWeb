@@ -28,15 +28,46 @@
   "click_carousel_nav": [
     {"action": "point", "element": "button", "role": "carousel-nav"},
     {"action": "click", "element": "button", "role": "carousel-nav", "repeatable": true},
-    {"action": "point", "element": "a", "role": "carousel-link"},
-    {"action": "click", "element": "a", "role": "carousel-link"}
+    {"action": "point", "role": "carousel-item"},
+    {"action": "click", "role": "carousel-item"}
   ],
   "scroll_carousel_container": [
     {"action": "point", "role": "carousel-container"},
     {"action": "scroll", "role": "carousel-container"}
   ],
   "click_tab": [
-    {"action": "point", "element": "button", "role": "tab"},
-    {"action": "click", "element": "button", "role": "tab"}
+    {"action": "point", "role": "tab"},
+    {"action": "click", "role": "tab"}
+  ],
+  "click_nav_item": [
+    {"action": "point", "role": "nav-item"},
+    {"action": "click", "role": "nav-dropdown"}
+  ],
+  "click_nav_dropdown": [
+    {"action": "point", "role": "nav-dropdown-handle"},
+    {"action": "point", "role": "nav-dropdown"},
+    {"action": "point", "role": "nav-item"},
+    {"action": "click", "role": "nav-dropdown"}
+  ],
+  "click_nav_hover_dropdown": [
+    {"action": "point", "role": "nav-dropdown-handle"},
+    {"action": "hover", "role": "nav-dropdown-handle"},
+    {"action": "point", "role": "nav-dropdown-handle"},
+    {"action": "point", "role": "nav-item"},
+    {"action": "click", "role": "nav-dropdown"}
+  ],
+  "hover_tooltip": [
+    {"action": "hover", "role": "tooltip-handle"}
+  ],
+  "input_search_enter": [
+    {"action": "point", "role": "search-input"},
+    {"action": "press", "role": "search-input", "repeatable": true},
+    {"action": "press", "which": "13", "role": "search-input"}
+  ],
+  "input_search_submit": [
+    {"action": "point", "role": "search-input"},
+    {"action": "press", "role": "search-input", "repeatable": true},
+    {"action": "point", "role": "search-submit"},
+    {"action": "click", "role": "search-submit"}
   ]
 }

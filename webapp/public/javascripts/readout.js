@@ -3,15 +3,22 @@ define(['jquery', 'socketManager'], function($, SM){
   var instances = {},
       instanceCounter = 0;
 
-  SM.listen('levelChange', function(interaction, level){
-    var i;
+  SM.listen('levelChange', function(interaction, levels){
+    var i, task, totalLevel = 0, avgLevel, taskNum = 0;
 
     if (typeof instances[interaction] === 'undefined'){
       return;
     }
 
+    for (task in levels){
+      taskNum += 1;
+      totalLevel += levels[task];
+    }
+
+    avgLevel = Math.floor(totalLevel / taskNum);
+
     for (i in instances[interaction]){
-      instances[interaction][i].changeLevel(level);
+      instances[interaction][i].changeLevel(avgLevel);
     }
     
   });

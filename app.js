@@ -5,7 +5,7 @@ requirejs.config({
     nodeRequire: require
 });
 
-requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(express, http, socketio, User, Classifier){
+requirejs(['express', 'http', 'socket.io', 'user_json', 'classifier'], function(express, http, socketio, User, Classifier){
     
   var app = express(),
       server = http.createServer(app),
@@ -34,35 +34,26 @@ requirejs(['express', 'http', 'socket.io', 'user', 'classifier'], function(expre
 
   io.sockets.on('connection', function(socket){
     try {
-      //read cookie
-      var id = null;
+      var user;
 
-      //create user object
-      //var user = new User(id);
+      socket.on('authenticate', function(id){
+        user = new User(id);
 
-      /*user.on('levelChange', function(context, level){
-        socket.emit('levelChange', context, level);
-      });*/
+        user.on('levelChange', function(context, level){
+          socket.emit('levelChange', context, level);
+        });
+      });
 
       socket.on('sequence', function(data){
-        console.log(data);
-        
-        //var classifier = new Classifier(data.context);
+        if (typeof user !== 'undefined'){
+          var classifier = new Classifier(data.context, user);
 
-        socket.emit('levelChange', data.context, 2);
-
-        //classifier.match(sequence);
+          classifier.match(data.sequence);
+        }
       });
     } catch (e) {
       console.log(e);
     }
   });
 
-    
-
-    //create a user object for this connection
-
-        //type is determined based on what interaction the user has entered or focused on
-      //call classifier.match to verify that the sequence is valid and, if it is, evaluate it
-        //evaluation will automatically update the user
 });
