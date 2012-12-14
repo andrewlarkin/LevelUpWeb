@@ -31,12 +31,17 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 			userLevels = {carousel_one: 3, carousel_two: 2};
 			user = {
 				id: 12345,
-				pointRate: 0.1,
+				data: {
+					pointRate: 0.1
+				},
 				classifiers: {},
 				getLevels: function(type, cb){
 					cb(userLevels);
 				},
 				setTime: function(){
+
+				},
+				emit: function(){
 
 				}
 			};
@@ -221,11 +226,11 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 				expect(c.timeCalculators.startmove).toHaveBeenCalled();
 			});
 
-			it('reduces the time by 200ms for each action that goes from a keyboard to a mouse', function(){
+			it('reduces the time by 400ms for each action that goes from a keyboard to a mouse', function(){
 				c.evaluate([{action: 'mousedown', time: 0}, {action: 'mouseup', time: 1000}, {action: 'pause', time: 300}, {action: 'keydown', 'time': 0}, {action: 'keyup', 'time': 900}], 'test');
 
-				//Even though the total times add up to 2200, we still have to factor out 400ms for each key level action.  This still leaves 1400, but since we homed from the mouse to the keyboard, 200ms is removed
-				expect(user.setTime).toHaveBeenCalledWith('test', 1200);
+				//Even though the total times add up to 2200, we still have to factor out 200ms for each key level action.  This still leaves 1800, but since we homed from the mouse to the keyboard, 400ms is removed
+				expect(user.setTime).toHaveBeenCalledWith('test', 1400);
 			});
 
 			describe('...and we are calling a calulator method...', function(){
@@ -268,10 +273,10 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 					expect(c.timeCalculators.mouseup({action: 'mouseup', time: 1000})).toEqual(0);
 				});
 
-				it('returns the difference between the mousedown and mouseup times, minus an expected 400ms', function(){
+				it('returns the difference between the mousedown and mouseup times, minus an expected 200ms', function(){
 					c.timeCalculators.mousedown({action: 'mousedown', time: 0});
 
-					expect(c.timeCalculators.mouseup({action: 'mouseup', time: 1000})).toEqual(600);
+					expect(c.timeCalculators.mouseup({action: 'mouseup', time: 1000})).toEqual(800);
 				});
 
 				it('sets the mouseStartTIme to null after calling mouseup', function(){
@@ -290,10 +295,10 @@ requirejs(['classifier', 'configLoad', 'tasks'], function(Classifier, ConfigLoad
 					expect(c.timeCalculators.keyup({action: 'keyup', time: 1000})).toEqual(0);
 				});
 
-				it('returns the difference between the keydown and keyup times, minus an expected 400ms', function(){
+				it('returns the difference between the keydown and keyup times, minus an expected 200ms', function(){
 					c.timeCalculators.keydown({action: 'keydown', time: 0});
 
-					expect(c.timeCalculators.keyup({action: 'keyup', time: 1000})).toEqual(600);
+					expect(c.timeCalculators.keyup({action: 'keyup', time: 1000})).toEqual(800);
 				});
 
 				it('sets the keyStartTIme to null after calling keyup', function(){
