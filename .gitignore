@@ -5,11 +5,3 @@ tasks.txt
 
 # nodejs files
 node_modules
-
-# Ruby files
-Gemfile.lock
-
-#compiled css
-webapp/public/stylesheets/css
-
-.sass-cache

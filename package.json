@@ -1,6 +1,6 @@
 {
 	"name": "LevelUpWeb",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Andrew Larkin <andrewlarkin2@gmail.com>",
 	"description": "A prototype system for determining user familiarity with website interfaces and displaying the most appropriate interface for that user",
 	"contributors": [{
@@ -9,16 +9,15 @@
 	}],
 	"dependencies": {
 		"requirejs": "2.1.x",
-		"grunt": "latest",
 		"express": "3.0.x",
 		"socket.io": "0.9.x",
 		"mongoose": "3.3.x",
-		"grunt-requirejs": "latest",
-		"grunt-contrib-compass": ">=0.1.0"
 	},
 	"devDependencies": {
 		"yuidocjs": "latest",
-		"grunt-jasmine-node": "latest"
+		"grunt": "latest",
+		"grunt-jasmine-node": "latest",
+		"grunt-requirejs": "latest"
 	},
 	"repository": {
 		"type": "git",
